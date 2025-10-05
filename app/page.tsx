@@ -1,6 +1,6 @@
-import { Box, Container, Heading, Stack, Text } from '@chakra-ui/react'
-import InvoiceForm from '@/components/InvoiceForm'
-import InvoiceList from '@/components/InvoiceList'
+import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import InvoiceForm from "@/components/InvoiceForm";
+import InvoiceList from "@/components/InvoiceList";
 
 export default function Page() {
   return (
@@ -14,5 +14,5 @@ export default function Page() {
         <InvoiceList />
       </Stack>
     </Container>
-  )
+  );
 }
