@@ -2,7 +2,7 @@ import './globals.css'
 import Providers from './providers'
 
 export const metadata = {
-  title: 'Manglai Fullstack Starter',
+  title: 'next15-mongo-test',
   description: 'Next 14 + MongoDB + Chakra UI demo'
 }
 
