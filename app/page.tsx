@@ -3,6 +3,8 @@ import InvoiceForm from "@/components/InvoiceForm";
 import InvoiceList from "@/components/InvoiceList";
 
 export default function Page() {
+  console.log("Page");
+
   return (
     <Container maxW="3xl" py={8}>
       <Stack spacing={6}>
