@@ -25,16 +25,29 @@ npm run dev
 # open http://localhost:3000
 ```
 
-## What to Explore
+## Architecture
 
-- `app/` folder uses the App Router.
-- API routes: `app/api/invoices/...` with NextResponse.
-- Mongoose connection pooling in `lib/db.ts` to avoid multiple connections in dev.
-- Chakra UI Provider in `app/providers.tsx` and components for UI.
-- SWR for client-side data fetching + optimistic revalidation.
+This project follows **Next.js 15 best practices** with a fully server-side architecture:
+
+- **Server Components** - `InvoiceList` fetches data directly from MongoDB (no API routes needed)
+- **Server Actions** - Form submissions (create/delete) use Server Actions with `revalidatePath()`
+- **Minimal Client JS** - Only interactive UI elements are client components (`useFormStatus` for loading states)
+- **No API Routes** - Direct database access in Server Components eliminates unnecessary HTTP overhead
+- **Progressive Enhancement** - Forms work without JavaScript enabled
+
+### Key Files
+
+- `app/serveractions/actions.ts` - Server Actions for create/delete operations
+- `components/InvoiceList.tsx` - Server Component with direct DB queries
+- `components/InvoiceFormServerAction.tsx` - Client form using Server Actions
+- `components/DeleteInvoiceButton.tsx` - Client button component
+- `lib/db.ts` - Mongoose connection pooling to avoid multiple connections in dev
+- `models/Invoice.ts` - Mongoose schema and TypeScript types
 
 ## Common Interview Talking Points
 
-- Why App Router + RSC improves TTFB and simplifies data fetching.
-- Aggregations in Mongo for reporting (e.g., totals per client or per month).
-- How you'd evolve this: auth (NextAuth), pagination, validation (Zod), server actions, Cloud Run on GCP.
+- **Why Server Components?** - Eliminates API routes for internal data, reduces client bundle, improves TTFB
+- **Server Actions vs API Routes** - When to use each pattern (mutations vs external APIs)
+- **Data Fetching Patterns** - Colocation of data dependencies with the UI that uses them
+- **Progressive Enhancement** - Forms work without JS, `revalidatePath()` for cache invalidation
+- **How to evolve this** - Auth (NextAuth), validation (Zod), pagination, aggregations, deployment on Vercel/Cloud Run
