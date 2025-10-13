@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/db";
 import { Invoice } from "@/models/Invoice";
 
-export async function createInvoice(prevState: any, formData: FormData) {
+export async function createInvoice(formData: FormData) {
   //TODO: we could validate the form data here with Zod
   const payload = {
     clientId: String(formData.get("clientId") ?? ""),
@@ -19,9 +19,12 @@ export async function createInvoice(prevState: any, formData: FormData) {
 
   await connectToDatabase();
   await Invoice.create(payload);
-
-  // Force RSC to refetch and re-render the homepage list
   revalidatePath("/");
+}
 
-  return { ...prevState, message: null }; //not sure
+export async function deleteInvoice(formData: FormData) {
+  const invoiceId = formData.get("invoiceId") as string;
+  await connectToDatabase();
+  await Invoice.findByIdAndDelete(invoiceId);
+  revalidatePath("/");
 }
