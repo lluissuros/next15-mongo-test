@@ -1,0 +1,23 @@
+---
+alwaysApply: false
+description: A simple test rule to demonstrate Cursor Rules functionality
+---
+
+# Test Rule
+
+Hello! This is a test rule created to demonstrate the Cursor Rules feature.
+
+## Purpose
+
+This rule serves as an example of how Cursor Rules work:
+
+- Rules are stored in `.cursor/rules/` directory
+- They use `.mdc` extension
+- They contain frontmatter metadata
+- They use Markdown formatting
+
+## When This Rule Applies
+
+This rule has `alwaysApply: false`, which means it won't be automatically applied. You can manually reference it when needed.
+
+Feel free to modify or delete this test rule!
